@@ -17,6 +17,13 @@ app.use(cors());
 // Path to the preloaded PDF
 const PDF_PATH = "./backend/uploads/legal_document.pdf";
 
+// Debug: Check if the file exists
+if (!fs.existsSync(PDF_PATH)) {
+  console.error(`PDF file not found at path: ${PDF_PATH}`);
+} else {
+  console.log(`PDF file found at path: ${PDF_PATH}`);
+}
+
 // API Endpoint: Process the PDF and Respond
 app.post("/chat", async (req, res) => {
   try {
@@ -58,3 +65,4 @@ app.post("/chat", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
