@@ -14,31 +14,40 @@ const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
 app.use(express.json());
 app.use(cors());
 
-// Path to the preloaded PDF
-const PDF_PATH = "./backend/uploads/legal_document.pdf";
+// Paths to the preloaded PDFs
+const PDF_PATHS = {
+  legalDocument: "./uploads/legal_document.pdf",
+  carCrashGuidance: "./uploads/car_crash_guidance.pdf",
 
-// Debug: Check if the file exists
-if (!fs.existsSync(PDF_PATH)) {
-  console.error(`PDF file not found at path: ${PDF_PATH}`);
-} else {
-  console.log(`PDF file found at path: ${PDF_PATH}`);
+};
+
+// Debug: Check if the files exist
+for (const [key, path] of Object.entries(PDF_PATHS)) {
+  if (!fs.existsSync(path)) {
+    console.error(`PDF file not found at path: ${path}`);
+  } else {
+    console.log(`PDF file found at path: ${path}`);
+  }
 }
 
 // API Endpoint: Process the PDF and Respond
 app.post("/chat", async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query, pdfType } = req.body;
 
     // Validate user input
-    if (!query) {
-      return res.status(400).json({ error: "Query is required" });
+    if (!query || !pdfType) {
+      return res.status(400).json({ error: "Query and PDF type are required" });
+    }
+
+    // Determine which PDF to use
+    const pdfPath = PDF_PATHS[pdfType];
+    if (!pdfPath || !fs.existsSync(pdfPath)) {
+      return res.status(404).json({ error: "PDF file not found" });
     }
 
     // Read and encode the PDF
-    if (!fs.existsSync(PDF_PATH)) {
-      return res.status(404).json({ error: "PDF file not found" });
-    }
-    const pdfData = fs.readFileSync(PDF_PATH);
+    const pdfData = fs.readFileSync(pdfPath);
     const base64PDF = Buffer.from(pdfData).toString("base64");
 
     // Send PDF and query to Google Gemini for processing
@@ -65,4 +74,3 @@ app.post("/chat", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
