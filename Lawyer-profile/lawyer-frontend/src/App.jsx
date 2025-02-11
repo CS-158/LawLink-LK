@@ -3,22 +3,48 @@ import { Bell, Calendar, Grid, Eye, Settings, Upload, X, HelpCircle, User, FileT
 
 function App() {
   const [profilePicture, setProfilePicture] = useState(
-    "https://i.pinimg.com/736x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg"
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   );
+  const [displayName, setDisplayName] = useState("User Name");
+  const [practiceAreas, setPracticeAreas] = useState("Practice Area");
+
+  // Temporary state for form inputs
+  const [tempDisplayName, setTempDisplayName] = useState(displayName);
+  const [tempPracticeAreas, setTempPracticeAreas] = useState(practiceAreas);
+  const [tempProfilePicture, setTempProfilePicture] = useState(profilePicture);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setProfilePicture(e.target.result);
+        // Update the temporary profile picture and display it immediately
+        setTempProfilePicture(e.target.result);
+        setProfilePicture(e.target.result); // Display in header immediately
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleRemovePhoto = () => {
-    setProfilePicture("https://i.pinimg.com/736x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg");
+    setTempProfilePicture("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    setProfilePicture("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"); // Reset in header immediately
+  };
+
+  const handleTempDisplayNameChange = (event) => {
+    setTempDisplayName(event.target.value);
+  };
+
+  const handleTempPracticeAreasChange = (event) => {
+    setTempPracticeAreas(event.target.value);
+  };
+
+  const handleSaveChanges = () => {
+    // Update the main state with the temporary state values
+    setDisplayName(tempDisplayName);
+    setPracticeAreas(tempPracticeAreas);
+    setProfilePicture(tempProfilePicture); // Finalize the profile picture
+    alert("Changes saved successfully!");
   };
 
   return (
@@ -27,7 +53,7 @@ function App() {
       <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white h-full flex-shrink-0">
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center gap-2 mb-12">
-            <div className="text-2xl font-bold tracking-tight">LawLink<span className="text-sm align-top ml-0.5">LK</span></div>
+            <div className="text-2xl font-bold tracking-tight"><img src='\public\hori.png'></img></div>
           </div>
           
           <nav className="space-y-4">
@@ -42,10 +68,6 @@ function App() {
             <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
               <FileText className="w-5 h-5" />
               <span className="font-medium">Cases</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-medium">Messages</span>
             </a>
             <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
               <Settings className="w-5 h-5" />
@@ -77,7 +99,7 @@ function App() {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white h-16 flex items-center justify-between px-6 shadow-sm">
-          <h1 className="text-xl font-semibold text-gray-800">Account Settings</h1>
+          <h1 className="text-xl font-semibold text-gray-800"></h1>
           <div className="flex items-center gap-6">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <Calendar className="w-5 h-5 text-gray-600" />
@@ -91,8 +113,8 @@ function App() {
             </button>
             <div className="flex items-center gap-3 pl-4 border-l">
               <div className="text-right">
-                <div className="font-medium text-gray-900">Michael Thompson</div>
-                <div className="text-sm text-gray-500">Criminal Law</div>
+                <div className="font-medium text-gray-900">{displayName}</div>
+                <div className="text-sm text-gray-500">{practiceAreas}</div>
               </div>
               <img 
                 src={profilePicture}
@@ -111,10 +133,11 @@ function App() {
                 <div className="space-y-8">
                   {/* Profile Picture Section */}
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Profile Picture</h2>
+                    <h2 className="text-lg font-semibold text-blue-600 mb-4">Account</h2>
+                    <hr></hr><br></br>
                     <div className="flex items-center gap-6">
                       <img 
-                        src={profilePicture}
+                        src={tempProfilePicture}
                         alt="Profile"
                         className="w-32 h-32 rounded-full object-cover ring-4 ring-gray-100"
                       />
@@ -151,6 +174,8 @@ function App() {
                         type="text"
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         placeholder="How clients will see you"
+                        value={tempDisplayName}
+                        onChange={handleTempDisplayNameChange}
                       />
                     </div>
                     <div>
@@ -191,6 +216,8 @@ function App() {
                         type="text"
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         placeholder="e.g., Criminal Law, Corporate Law"
+                        value={tempPracticeAreas}
+                        onChange={handleTempPracticeAreasChange}
                       />
                     </div>
                     <div className="col-span-2">
@@ -204,7 +231,10 @@ function App() {
 
                   {/* Save Button */}
                   <div className="flex justify-end pt-4">
-                    <button className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                    <button
+                      onClick={handleSaveChanges}
+                      className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
                       Save Changes
                     </button>
                   </div>
