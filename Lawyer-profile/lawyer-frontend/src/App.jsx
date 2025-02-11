@@ -53,7 +53,7 @@ function App() {
       <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white h-full flex-shrink-0">
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center gap-2 mb-12">
-            <div className="text-2xl font-bold tracking-tight"><img src='\public\hori.png'></img></div>
+            <div className="text-2xl font-bold tracking-tight"><img src='\hori.png'></img></div>
           </div>
           
           <nav className="space-y-4">
@@ -133,7 +133,7 @@ function App() {
                 <div className="space-y-8">
                   {/* Profile Picture Section */}
                   <div>
-                    <h2 className="text-lg font-semibold text-blue-600 mb-4">Account</h2>
+                    <h1 className="text-xl font-semibold text-gray-600">Account Settings</h1>
                     <hr></hr><br></br>
                     <div className="flex items-center gap-6">
                       <img 
