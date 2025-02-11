@@ -62,12 +62,8 @@ function App() {
               <span className="font-medium">Dashboard</span>
             </a>
             <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
-              <User className="w-5 h-5" />
-              <span className="font-medium">Profile</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
               <FileText className="w-5 h-5" />
-              <span className="font-medium">Cases</span>
+              <span className="font-medium">View Cases</span>
             </a>
             <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
               <Settings className="w-5 h-5" />
