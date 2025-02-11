@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bell, Calendar, Grid, Eye, Settings, Upload, X, HelpCircle, User, FileText, MessageSquare } from 'lucide-react';
 
 function App() {
+  const [profilePicture, setProfilePicture] = useState(
+    "https://i.pinimg.com/736x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg"
+  );
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfilePicture(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    setProfilePicture("https://i.pinimg.com/736x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg");
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -76,7 +95,7 @@ function App() {
                 <div className="text-sm text-gray-500">Criminal Law</div>
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80"
+                src={profilePicture}
                 alt="Profile"
                 className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100"
               />
@@ -95,16 +114,29 @@ function App() {
                     <h2 className="text-lg font-semibold text-gray-900 mb-4">Profile Picture</h2>
                     <div className="flex items-center gap-6">
                       <img 
-                        src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
+                        src={profilePicture}
                         alt="Profile"
                         className="w-32 h-32 rounded-full object-cover ring-4 ring-gray-100"
                       />
                       <div className="space-y-2">
-                        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2">
+                        <input
+                          type="file"
+                          id="profile-picture-upload"
+                          accept="image/*"
+                          style={{ display: 'none' }}
+                          onChange={handleFileChange}
+                        />
+                        <label
+                          htmlFor="profile-picture-upload"
+                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 cursor-pointer"
+                        >
                           <Upload className="w-4 h-4" />
                           Upload new photo
-                        </button>
-                        <button className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors block text-sm">
+                        </label>
+                        <button
+                          onClick={handleRemovePhoto}
+                          className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors block text-sm"
+                        >
                           Remove photo
                         </button>
                       </div>
