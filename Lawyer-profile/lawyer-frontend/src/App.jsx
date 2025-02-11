@@ -94,23 +94,24 @@ function App() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="bg-white h-16 flex items-center justify-between px-6 shadow-sm">
+        <header className="bg-blue-800 h-16 flex items-center justify-between px-6 shadow-sm">
           <h1 className="text-xl font-semibold text-gray-800"></h1>
           <div className="flex items-center gap-6">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Calendar className="w-5 h-5 text-gray-600" />
+            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+              <Calendar className="w-5 h-5 text-white" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <HelpCircle className="w-5 h-5 text-gray-600" />
+            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+              <HelpCircle className="w-5 h-5 text-white" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
-              <Bell className="w-5 h-5 text-gray-600" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors relative">
+              <Bell className="w-5 h-5 text-white" />
+              <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
             <div className="flex items-center gap-3 pl-4 border-l">
+            
               <div className="text-right">
-                <div className="font-medium text-gray-900">{displayName}</div>
-                <div className="text-sm text-gray-500">{practiceAreas}</div>
+                <div className="font-bold text-white">{displayName}</div>
+                <div className="text-sm text-white">{practiceAreas}</div>
               </div>
               <img 
                 src={profilePicture}
@@ -147,7 +148,7 @@ function App() {
                         />
                         <label
                           htmlFor="profile-picture-upload"
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 cursor-pointer"
+                          className="px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 cursor-pointer"
                         >
                           <Upload className="w-4 h-4" />
                           Upload new photo
@@ -229,7 +230,7 @@ function App() {
                   <div className="flex justify-end pt-4">
                     <button
                       onClick={handleSaveChanges}
-                      className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                      className="px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                     >
                       Save Changes
                     </button>
