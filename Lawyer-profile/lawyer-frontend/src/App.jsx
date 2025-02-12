@@ -13,6 +13,9 @@ function App() {
   const [tempPracticeAreas, setTempPracticeAreas] = useState(practiceAreas);
   const [tempProfilePicture, setTempProfilePicture] = useState(profilePicture);
 
+  // State for qualification photos
+  const [qualificationPhotos, setQualificationPhotos] = useState([]);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -45,6 +48,21 @@ function App() {
     setPracticeAreas(tempPracticeAreas);
     setProfilePicture(tempProfilePicture); // Finalize the profile picture
     alert("Changes saved successfully!");
+  };
+
+  // Handle qualification photo upload
+  const handleQualificationPhotoUpload = (event) => {
+    const files = event.target.files;
+    if (files) {
+      const newPhotos = Array.from(files).map(file => URL.createObjectURL(file));
+      setQualificationPhotos([...qualificationPhotos, ...newPhotos]);
+    }
+  };
+
+  // Handle qualification photo removal
+  const handleRemoveQualificationPhoto = (index) => {
+    const updatedPhotos = qualificationPhotos.filter((_, i) => i !== index);
+    setQualificationPhotos(updatedPhotos);
   };
 
   return (
@@ -200,18 +218,53 @@ function App() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Qualifications</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Languages Known</label>
                       <input 
-                        type="text"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="e.g., LLB, Attorney at Law"
+                        type="tel"
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        placeholder="Languages you can communicate in"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Practice Areas</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Practice Courts</label>
+                      <input 
+                        type="tel"
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        placeholder="Enter the courts you practice in"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Qualifications</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handleQualificationPhotoUpload}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      />
+                      <div className="mt-4 grid grid-cols-3 gap-4">
+                        {qualificationPhotos.map((photo, index) => (
+                          <div key={index} className="relative">
+                            <img
+                              src={photo}
+                              alt={`Qualification ${index + 1}`}
+                              className="w-full h-24 object-cover rounded-lg"
+                            />
+                            <button
+                              onClick={() => handleRemoveQualificationPhoto(index)}
+                              className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Specialization</label>
                       <input 
                         type="text"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         placeholder="e.g., Criminal Law, Corporate Law"
                         value={tempPracticeAreas}
                         onChange={handleTempPracticeAreasChange}
