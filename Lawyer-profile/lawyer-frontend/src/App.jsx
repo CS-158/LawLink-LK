@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-2">
+      <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center gap-2 mb-12">
             <div className="text-2xl font-bold tracking-tight"><a href='#'><img src='\hori.png'></img></a></div>
@@ -94,7 +94,7 @@ function App() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="bg-blue-800 h-16 flex items-center justify-between px-6 shadow-sm rounded-tl-full rounded-bl-full mt-2">
+        <header className="bg-blue-800 h-16 flex items-center justify-between px-6 shadow-sm rounded-tl-full rounded-bl-full mt-2 ml-1">
           <h1 className="text-xl font-semibold text-gray-800"></h1>
           <div className="flex items-center gap-6">
             <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
@@ -125,7 +125,7 @@ function App() {
         {/* Profile Content */}
         <main className="p-5 flex-1 overflow-auto ml-0.5">
           <div className="max-w-full mx-auto">
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
               <div className="p-7">
                 <div className="space-y-8">
                   {/* Profile Picture Section */}
