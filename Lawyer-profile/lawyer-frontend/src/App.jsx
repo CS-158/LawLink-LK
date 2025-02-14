@@ -16,6 +16,14 @@ function App() {
   // State for qualification photos
   const [qualificationPhotos, setQualificationPhotos] = useState([]);
 
+  // Notification state
+  const [notificationsVisible, setNotificationsVisible] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: "New case assigned: Smith vs. Johnson", date: "2023-10-01" },
+    { id: 2, message: "Reminder: Meeting with client at 3 PM", date: "2023-10-02" },
+    { id: 3, message: "Document review completed", date: "2023-10-03" },
+  ]);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -65,25 +73,30 @@ function App() {
     setQualificationPhotos(updatedPhotos);
   };
 
+  // Toggle notifications visibility
+  const toggleNotifications = () => {
+    setNotificationsVisible(!notificationsVisible);
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
+      <div className="w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center gap-2 mb-12">
             <div className="text-2xl font-bold tracking-tight"><a href='#'><img src='\hori.png'></img></a></div>
           </div>
           
           <nav className="space-y-4">
-            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
+            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-500/50 px-4 py-2 rounded-lg transition-colors">
               <Grid className="w-5 h-5" />
               <span className="font-medium">Dashboard</span>
             </a>
-            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
+            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-500/50 px-4 py-2 rounded-lg transition-colors">
               <FileText className="w-5 h-5" />
               <span className="font-medium">View Cases</span>
             </a>
-            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-700/50 px-4 py-2 rounded-lg transition-colors">
+            <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-500/50 px-4 py-2 rounded-lg transition-colors">
               <Settings className="w-5 h-5" />
               <span className="font-medium">Settings</span>
             </a>
@@ -121,12 +134,34 @@ function App() {
             <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
               <HelpCircle className="w-5 h-5 text-white" />
             </button>
-            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors relative">
-              <Bell className="w-5 h-5 text-white" />
-              <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
+            <div className="relative">
+              <button 
+                className="p-2 hover:bg-blue-700 rounded-full transition-colors relative"
+                onClick={toggleNotifications}
+              >
+                <Bell className="w-5 h-5 text-white" />
+                <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              {notificationsVisible && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50">
+                  <div className="p-4 border-b">
+                    <h3 className="text-lg font-semibold">Notifications</h3>
+                  </div>
+                  <div className="max-h-64 overflow-y-auto">
+                    {notifications.map(notification => (
+                      <div key={notification.id} className="p-4 border-b hover:bg-gray-50">
+                        <p className="text-sm text-gray-700">{notification.message}</p>
+                        <p className="text-xs text-gray-500">{notification.date}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-4 text-center text-sm text-blue-600 hover:text-blue-800 cursor-pointer">
+                    Mark all as read
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="flex items-center gap-3 pl-4 border-l">
-            
               <div className="text-right">
                 <div className="font-bold text-white">{displayName}</div>
                 <div className="text-sm text-white">{practiceAreas}</div>
