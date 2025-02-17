@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Calendar, Grid, Eye, Settings, Upload, X, HelpCircle, User, FileText, MessageSquare } from 'lucide-react';
 
 function App() {
@@ -19,10 +19,32 @@ function App() {
   // Notification state
   const [notificationsVisible, setNotificationsVisible] = useState(false);
   const [notifications, setNotifications] = useState([
-    { id: 1, message: "New case assigned: Smith vs. Johnson", date: "2023-10-01" },
-    { id: 2, message: "Reminder: Meeting with client at 3 PM", date: "2023-10-02" },
-    { id: 3, message: "Document review completed", date: "2023-10-03" },
+    { id: 1, message: "New case assigned: Smith vs. Johnson", date: "2023-10-01", read: false },
+    { id: 2, message: "Reminder: Meeting with client at 3 PM", date: "2023-10-02", read: false },
+    { id: 3, message: "Document review completed", date: "2023-10-03", read: false },
   ]);
+
+  // Ref for the notification frame
+  const notificationRef = useRef(null);
+
+  // Handle clicks outside the notification frame
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setNotificationsVisible(false);
+      }
+    };
+
+    // Add event listener when the notification frame is visible
+    if (notificationsVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [notificationsVisible]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -77,6 +99,18 @@ function App() {
   const toggleNotifications = () => {
     setNotificationsVisible(!notificationsVisible);
   };
+
+  // Handle marking all notifications as read
+  const handleMarkAllAsRead = () => {
+    const updatedNotifications = notifications.map(notification => ({
+      ...notification,
+      read: true,
+    }));
+    setNotifications(updatedNotifications);
+  };
+
+  // Check if there are any unread notifications
+  const hasUnreadNotifications = notifications.some(notification => !notification.read);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -140,10 +174,12 @@ function App() {
                 onClick={toggleNotifications}
               >
                 <Bell className="w-5 h-5 text-white" />
-                <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
+                {hasUnreadNotifications && (
+                  <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
+                )}
               </button>
               {notificationsVisible && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50">
+                <div ref={notificationRef} className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50">
                   <div className="p-4 border-b">
                     <h3 className="text-lg font-semibold">Notifications</h3>
                   </div>
@@ -155,7 +191,10 @@ function App() {
                       </div>
                     ))}
                   </div>
-                  <div className="p-4 text-center text-sm text-blue-600 hover:text-blue-800 cursor-pointer">
+                  <div 
+                    className="p-4 text-center text-sm text-blue-600 hover:text-blue-800 cursor-pointer"
+                    onClick={handleMarkAllAsRead}
+                  >
                     Mark all as read
                   </div>
                 </div>
