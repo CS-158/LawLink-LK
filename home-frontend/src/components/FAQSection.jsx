@@ -11,7 +11,7 @@ const FAQSection = () => {
   return (
     <section id="faq">
       <div className="faq-card">
-        <div className="faq-item">
+        <div className={`faq-item ${openQuestion === 0 ? 'open' : ''}`}>
           <button
             className="faq-question"
             onClick={() => toggleQuestion(0)}
@@ -24,7 +24,7 @@ const FAQSection = () => {
             </div>
           )}
         </div>
-        <div className="faq-item">
+        <div className={`faq-item ${openQuestion === 1 ? 'open' : ''}`}>
           <button
             className="faq-question"
             onClick={() => toggleQuestion(1)}
@@ -37,6 +37,7 @@ const FAQSection = () => {
             </div>
           )}
         </div>
+        {/* Add more FAQ items here */}
       </div>
     </section>
   );
