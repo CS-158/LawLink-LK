@@ -59,7 +59,7 @@
     margin-left: 10px;
     transform: translateY(-38px); /* Raised "LK" */
     font-weight: 600;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 1); /* Intense glow for "LK" */
+    text-shadow: 0 0 30px rgb(255, 255, 255); /* Intense glow for "LK" */
     transition: transform 0.3s ease-in-out; /* Smooth animation */
   }
   
