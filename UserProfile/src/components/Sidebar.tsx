@@ -1,52 +1,55 @@
-import { LayoutGrid, PenSquare, MessageCircle, Settings } from "lucide-react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { LayoutGrid, PenSquare, MessageCircle, Settings } from 'lucide-react';
 
 const Sidebar = () => {
-  const menuItems = [
-    { icon: LayoutGrid, label: "Dashboard", path: "/" },
-    { icon: PenSquare, label: "Create post", path: "/create" },
-    { icon: MessageCircle, label: "Ask lexbot", path: "/lexbot" },
-    { icon: Settings, label: "Settings", path: "/settings" },
-  ];
-
   return (
-    <div className="bg-lawlink-primary text-white w-64 min-h-screen p-6">
-      <div className="mb-12">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <span className="text-3xl"><></></span> LawLink
-          <span className="text-sm font-normal">LK</span>
-        </h1>
+    <div className="w-64 bg-blue-600 text-white min-h-screen p-6">
+      {/* Logo */}
+      <div className="flex items-center gap-2 mb-12">
+        <div className="w-8 h-8 bg-white rounded"></div>
+        <h1 className="text-2xl font-bold">LawLink LK</h1>
       </div>
 
+      {/* Navigation */}
       <nav className="space-y-6">
-        {menuItems.map((item) => (
-          <Link
-            key={item.label}
-            to={item.path}
-            className="flex items-center gap-3 text-white/80 hover:text-white transition-colors"
-          >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
-          </Link>
-        ))}
+        <a href="#" className="flex items-center gap-3 text-lg">
+          <LayoutGrid className="w-6 h-6" />
+          Dashboared
+        </a>
+        <a href="#" className="flex items-center gap-3 text-lg">
+          <PenSquare className="w-6 h-6" />
+          Create post
+        </a>
+        <a href="#" className="flex items-center gap-3 text-lg">
+          <MessageCircle className="w-6 h-6" />
+          Ask lexbot
+        </a>
+        <a href="#" className="flex items-center gap-3 text-lg">
+          <Settings className="w-6 h-6" />
+          Settings
+        </a>
       </nav>
 
-      <div className="mt-12 pt-6 border-t border-white/10">
-        <h2 className="text-sm font-semibold text-white/60 mb-4">MY CASES</h2>
-        <div className="space-y-3">
-          {["Case One", "Case Two", "Case Three"].map((caseName, index) => (
-            <Link
-              key={index}
-              to={`/case/${index + 1}`}
-              className="block text-white/80 hover:text-white transition-colors"
-            >
-              {caseName}
-            </Link>
-          ))}
+      {/* My Cases */}
+      <div className="mt-12">
+        <h2 className="text-xl font-bold mb-4">MY CASES</h2>
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+            <span>CASE NAME</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-cyan-400"></div>
+            <span>CASE NAME</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-purple-400"></div>
+            <span>CASE NAME</span>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;
