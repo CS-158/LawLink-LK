@@ -6,7 +6,6 @@ import FeaturesSection from "./components/FeaturesSection";
 import FAQSection from "./components/FAQSection";
 import ContactUsSection from "./components/ContactUsSection";
 
-import "./styles/global.css";
 
 const App = () => {
   // Scroll event listener to add/remove the 'scrolled' class on HeroSection

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/faq.css';
 
 const FAQSection = () => {
@@ -42,10 +43,7 @@ const FAQSection = () => {
   const FAQColumn = ({ faqs, startIndex }) => (
     <div className="faq-column">
       {faqs.map((faq, index) => (
-        <div 
-          key={startIndex + index} 
-          className={`faq-item ${activeIndex === (startIndex + index) ? 'active' : ''}`}
-        >
+        <div key={startIndex + index} className="faq-item">
           <div 
             className="faq-question"
             onClick={() => toggleFAQ(startIndex + index)}
@@ -53,9 +51,19 @@ const FAQSection = () => {
             {faq.question}
             <span className="faq-icon">{activeIndex === (startIndex + index) ? '−' : '+'}</span>
           </div>
-          <div className="faq-answer">
-            {faq.answer}
-          </div>
+          <AnimatePresence>
+            {activeIndex === (startIndex + index) && (
+              <motion.div 
+                className="faq-answer"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {faq.answer}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       ))}
     </div>
@@ -64,10 +72,8 @@ const FAQSection = () => {
   return (
     <div className="faq-container">
       <div className="faq-header">
-        <h2>Any Questions?</h2>
-        <p>We got you</p>
+        <h2>Any Questions? <br /> We got you</h2>
       </div>
-      
       <div className="faq-content">
         <FAQColumn faqs={faqData.leftColumn} startIndex={0} />
         <FAQColumn faqs={faqData.rightColumn} startIndex={faqData.leftColumn.length} />
