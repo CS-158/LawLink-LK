@@ -1,18 +1,23 @@
 import React from 'react';
 import { Grid, Eye, Settings } from 'lucide-react';
 
+
 const Sidebar = () => {
   return (
-    <div className="w-64 bg-blue-700 text-white flex flex-col">
-      <div className="p-6">
+    <div className="w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
+      <div className="p-6 flex items-center space-x-4">
+        <div className="w-12 h-12 bg-white rounded-full">
+          <img src='/hori.png'></img>
+        </div>
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-white rounded">
             <div className="w-full h-full flex items-center justify-center text-blue-700 font-bold">
-            <div className="text-2xl font-bold tracking-tight"><a href='#'><img src='\hori.png'></img></a></div>
+            <div><a href='#'><img src='/hori.png'></img></a></div>
+            
             </div>
           </div>
-          <span className="text-xl font-bold">LawLink</span>
-          <span className="text-sm">LK</span>
+          <span className="text-xl font-bold">kkk</span>
+          <span className="text-sm"></span>
         </div>
       </div>
 
