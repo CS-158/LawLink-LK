@@ -1,48 +1,46 @@
-import React, { useEffect } from "react";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import AboutUsSection from "./components/AboutUsSection";
-import FeaturesSection from "./components/FeaturesSection";
-import FAQSection from "./components/FAQSection";
-import ContactUsSection from "./components/ContactUsSection";
-
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
+import HowItWorks from "./pages/HowItWorks/HowItWorks";
+import NotFound from "./pages/NotFound";
+import ClientLogin from "./pages/auth/ClientLogin";
+import LawyerLogin from "./pages/auth/LawyerLogin";
+import Register from "./pages/auth/Register";
+import CookiePopup from "./components/CookiePopup";
+import LoadingScreen from "./pages/loading/LoadingScreen";
 
 const App = () => {
-  // Scroll event listener to add/remove the 'scrolled' class on HeroSection
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.querySelector(".hero-section");
-      if (window.scrollY > 100) {
-        heroSection.classList.add("scrolled"); // Add class when scrolled past 100px
-      } else {
-        heroSection.classList.remove("scrolled"); // Remove class when back to top
-      }
-    };
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // Adjust the delay as needed
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div>
-      <Navbar /> {/* Add Navbar here, so it sits above the HeroSection */}
-      <section id="home">
-        <HeroSection />
-      </section>
-      <section id="about-us">
-        <AboutUsSection />
-      </section>
-      <section id="features">
-        <FeaturesSection />
-      </section>
-      <section id="faq">
-        <FAQSection />
-      </section>
-      <section id="contact-us">
-        <ContactUsSection />
-      </section>
-    </div>
+    <Router>
+      {/* Show LoadingScreen while loading */}
+      {isLoading && <LoadingScreen />}
+
+      {/* Main Content */}
+      {!isLoading && (
+        <>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/auth/client-login" element={<ClientLogin />} />
+            <Route path="/auth/lawyer-login" element={<LawyerLogin />} />
+            <Route path="/auth/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <CookiePopup />
+        </>
+      )}
+    </Router>
   );
 };
 
