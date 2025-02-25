@@ -1,35 +1,25 @@
 import React from 'react';
 import { Grid, Eye, Settings } from 'lucide-react';
-
+import logo from './hori.png'; // Import the logo
 
 const Sidebar = () => {
   return (
     <div className="w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
+      {/* Logo and Brand Name */}
       <div className="p-6 flex items-center space-x-4">
-        <div className="w-12 h-12 bg-white rounded-full">
-          <img src='/hori.png'></img>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-white rounded">
-            <div className="w-full h-full flex items-center justify-center text-blue-700 font-bold">
-            <div><a href='#'><img src='/hori.png'></img></a></div>
-            
-            </div>
-          </div>
-          <span className="text-xl font-bold">kkk</span>
-          <span className="text-sm"></span>
-        </div>
+      <a href='#'><img src={logo} alt="LawLink LK Logo"/></a>
       </div>
 
+      {/* Navigation Links */}
       <nav className="flex-1 px-4">
         <div className="space-y-2">
-          <a href="#" className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-blue-800">
+          <a href="#" className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-800">
             <Grid className="w-6 h-6" />
             <span>Dashboard</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-800">
+          <a href="#" className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-blue-800">
             <Eye className="w-6 h-6" />
-            <span>View cases</span>
+            <span>View Cases</span>
           </a>
           <a href="#" className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-800">
             <Settings className="w-6 h-6" />
@@ -37,10 +27,11 @@ const Sidebar = () => {
           </a>
         </div>
 
+        {/* Active Cases Section */}
         <div className="mt-8">
-          <h2 className="px-4 text-sm font-semibold text-blue-200 uppercase">MY CASES</h2>
+          <h2 className="px-4 text-sm font-semibold text-blue-200 uppercase">ACTIVE CASES</h2>
           <div className="mt-4 space-y-2">
-            {['CASE NAME', 'CASE NAME', 'CASE NAME'].map((name, index) => (
+            {['Smith vs. Johnson', 'Estate Planning', 'Corporate Merger'].map((name, index) => (
               <a
                 key={index}
                 href="#"
@@ -55,6 +46,6 @@ const Sidebar = () => {
       </nav>
     </div>
   );
-}
+};
 
 export default Sidebar;
