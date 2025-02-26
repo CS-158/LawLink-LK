@@ -20,6 +20,7 @@ function Chat() {
         <div className="flex-1 " >
           <MessageContainer />
         </div>
+        
        
       
     </div>

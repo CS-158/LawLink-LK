@@ -1,8 +1,10 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { getCookie } from "../utills/cookies";
 
 export const AppContext = createContext(); 
+
 
 export const AppContentProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL; 
@@ -11,17 +13,64 @@ export const AppContentProvider = (props) => {
     const [lawyerData, setLawyerData] = useState(null);
     const [email, setEmail] = useState("");
 
+
+ useEffect(() => {
+  const checkLoginStatus = async () => {
+    try {
+      // Check for user login
+      try {
+        const { data } = await axios.get(backendUrl + '/api/user/data', {
+          withCredentials: true
+        });
+        
+        if (data.success) {
+          setIsLoggedIn(true);
+          setUserData(data.userData);
+          return; // If user is logged in, stop here
+        }
+      } catch (error) {
+        // User not logged in, try checking lawyer next
+      }
+      
+      // Check for lawyer login
+      try {
+        const { data } = await axios.get(backendUrl + '/api/lawyer-data/data', {
+          withCredentials: true
+        });
+        
+        if (data.success) {
+          setIsLoggedIn(true);
+          setLawyerData(data.UserData);
+          return;
+        }
+      } catch (error) {
+        // Lawyer not logged in either
+      }
+      
+      // If we reach here, no one is logged in
+      setIsLoggedIn(false);
+      
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      setIsLoggedIn(false);
+    }
+  };
+  
+  checkLoginStatus();
+}, [backendUrl]);
+
     const getUserData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/user/data', {
                 withCredentials: true, 
+                headers: {
+                    Authorization: `Bearer ${getCookie('jwt')}`,
+                },
             });
         
             if (data.success) {
                 setUserData(data.userData);
-            } else {
-                toast.error(data.message || 'Failed to retrieve user data.');
-            }
+            } 
         } catch (error) {
             console.error('Error fetching user data:', error);
             toast.error('Error fetching user data.');
