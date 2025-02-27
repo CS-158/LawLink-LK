@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // Import useEffect
+import React from 'react';
 import { X } from 'lucide-react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styling for the calendar
@@ -47,14 +47,6 @@ const CalendarReminders = ({ onClose }) => {
     }
     return null;
   };
-
-  // Prevent main page scrolling when the modal is open
-  useEffect(() => {
-    document.body.classList.add('overflow-hidden'); // Disable scrolling
-    return () => {
-      document.body.classList.remove('overflow-hidden'); // Re-enable scrolling
-    };
-  }, []);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
