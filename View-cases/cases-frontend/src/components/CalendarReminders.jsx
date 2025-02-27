@@ -58,7 +58,7 @@ const CalendarReminders = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-lg w-3/4 max-w-4xl p-6">
+      <div className="bg-white rounded-lg shadow-lg w-3/4 max-w-4xl p-6 p-6 max-h-[90vh] overflow-y-auto">
         {/* Header with close button */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Calendar Reminders</h2>
@@ -70,7 +70,7 @@ const CalendarReminders = ({ onClose }) => {
         {/* Flex container for calendar and upcoming events */}
         <div className="flex gap-6">
           {/* Calendar Section */}
-          <div className="flex-1">
+          <div className="flex-2">
             <Calendar
               tileClassName={tileClassName}
               value={new Date(2025, 1, 28)}
