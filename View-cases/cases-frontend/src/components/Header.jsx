@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Calendar, HelpCircle } from 'lucide-react';
+import CalendarReminders from './CalendarReminders';
 
 const Header = ({ displayName, practiceAreas, profilePicture }) => {
   const [notificationsVisible, setNotificationsVisible] = useState(false);
+  const [calendarVisible, setCalendarVisible] = useState(false);
   const [notifications, setNotifications] = useState([
     { id: 1, message: "New case assigned: Smith vs. Johnson", date: "2023-10-01", read: false },
     { id: 2, message: "Reminder: Meeting with client at 3 PM", date: "2023-10-02", read: false },
@@ -31,6 +33,10 @@ const Header = ({ displayName, practiceAreas, profilePicture }) => {
     setNotificationsVisible(!notificationsVisible);
   };
 
+  const toggleCalendar = () => {
+    setCalendarVisible(!calendarVisible);
+  };
+
   const handleMarkAllAsRead = () => {
     const updatedNotifications = notifications.map(notification => ({
       ...notification,
@@ -45,7 +51,10 @@ const Header = ({ displayName, practiceAreas, profilePicture }) => {
     <header className="bg-blue-800 h-16 flex items-center justify-between px-6 shadow-sm rounded-tl-full rounded-bl-full mt-2 ml-1">
       <h1 className="text-xl font-semibold text-gray-800"></h1>
       <div className="flex items-center gap-6">
-        <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+        <button 
+          className="p-2 hover:bg-blue-700 rounded-full transition-colors"
+          onClick={toggleCalendar}
+        >
           <Calendar className="w-5 h-5 text-white" />
         </button>
         <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
@@ -95,8 +104,9 @@ const Header = ({ displayName, practiceAreas, profilePicture }) => {
           />
         </div>
       </div>
+      {calendarVisible && <CalendarReminders onClose={() => setCalendarVisible(false)} />}
     </header>
   );
 };
 
-export default Header; 
+export default Header;
