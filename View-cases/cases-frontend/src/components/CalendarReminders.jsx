@@ -29,28 +29,35 @@ const CalendarReminders = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-96 p-6">
+      <div className="bg-white rounded-lg shadow-lg w-3/4 max-w-4xl p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Calendar Reminders</h2>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-4">
-          {/* Calendar Component */}
-          <Calendar
-            tileClassName={tileClassName} // Highlight event dates
-            value={new Date(2018, 10, 1)} // Set initial view to November 2018
-          />
-          {/* List of Events */}
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold mb-2">Upcoming Events</h3>
-            {events.map((event, index) => (
-              <div key={index} className="border-b pb-4">
-                <div className="text-sm text-gray-500">{event.date.toDateString()}</div>
-                <div className="font-medium">{event.title}</div>
-              </div>
-            ))}
+
+        {/* Flex container for calendar and upcoming events */}
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Calendar Section */}
+          <div className="flex-1">
+            <Calendar
+              tileClassName={tileClassName}
+              value={new Date(2018, 10, 1)}
+            />
+          </div>
+
+          {/* Upcoming Events Section */}
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-4">Upcoming Events</h3>
+            <div className="space-y-4">
+              {events.map((event, index) => (
+                <div key={index} className="border-b pb-4">
+                  <div className="text-sm text-gray-500">{event.date.toDateString()}</div>
+                  <div className="font-medium">{event.title}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
