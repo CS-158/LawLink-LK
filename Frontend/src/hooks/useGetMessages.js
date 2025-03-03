@@ -20,9 +20,9 @@ const useGetMessages = () => {
 
         let otherUserId;
         if (userData) {
-            otherUserId = "67c033958471238ebaa4445a"; // Lawyer ID
+            otherUserId = "67c5582ba2a25b20cb9de1eb"; // Lawyer ID
         } else if (lawyerData) {
-            otherUserId = "67bb15745b40ffa3d45ddd78"; // Client ID
+            otherUserId = "67c556ffa2a25b20cb9de1d2"; // Client ID
         } else {
             setError("Cannot determine conversation partner");
             return [];
