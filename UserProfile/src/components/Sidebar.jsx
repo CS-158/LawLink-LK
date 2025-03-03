@@ -7,7 +7,7 @@ function Sidebar() {
     <div className="w-64 bg-blue-600 text-white min-h-screen p-6">
       {/* Logo */}
       <div className="flex items-center gap-2 mb-12">
-      <img src="/lawlink.png" className="w-8 h-8" alt="LawLink Logo" />
+      <img src="../../src/lawlink.png" className="w-8 h-8" alt="LawLink Logo" />
       <h1 className="text-2xl font-bold">LawLink LK</h1>
       </div>
 

@@ -7,7 +7,7 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="flex items-center gap-2 mb-12">
         <div className="w-8 h-8 bg-white rounded"></div>
-        <h1 className="text-2xl font-bold">LawLink LK</h1>
+        <h1 className="text-2xl font-bold">Law</h1>
       </div>
 
       {/* Navigation */}
