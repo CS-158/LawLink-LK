@@ -45,7 +45,7 @@ function TaskList() {
             <Check className="w-3 h-3 text-gray-300" />
           </div>
           <div>
-            <h3 className="font-medium">Read Provided Resources</h3>
+            <h3 className="font-medium">Read Provided Resources.</h3>
             <p className="text-sm text-gray-500">Read the attached guide on intellectual property rights before our next meeting</p>
           </div>
         </div>
