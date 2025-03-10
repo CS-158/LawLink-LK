@@ -14,19 +14,19 @@ function Sidebar() {
       {/* Navigation */}
       <nav className="space-y-6">
         <a href="#" className="flex items-center gap-3 text-lg">
-          <LayoutGrid className="w-6 h-6". />
+          <LayoutGrid className="w-6 h-6" />
           Dashboared
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
-          <PenSquare className="w-6 h-6". />
+          <PenSquare className="w-6 h-6" />
           Create post
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
-          <MessageCircle className="w-6 h-6". />
+          <MessageCircle className="w-6 h-6" />
           Ask lexbot
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
-        <Settings className="w-6 h-6". />
+        <Settings className="w-6 h-6" />
           Settings
         </a>
       </nav>
