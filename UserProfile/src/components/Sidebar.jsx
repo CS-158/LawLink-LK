@@ -22,7 +22,7 @@ function Sidebar() {
           Create post
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
-          <MessageCircle className="w-6 h-6" />
+          
           Ask lexbot
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
