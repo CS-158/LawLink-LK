@@ -8,13 +8,7 @@ const LawyerNotes = () => {
         <h2 className="text-xl font-semibold">LAWYER NOTES</h2>
       </div>
 
-      <div className="space-y-6">
-        <div>
-          <h3 className="font-medium mb-2">Document Review Notes</h3>
-          <p className="text-sm text-gray-600">
-            I reviewed the employment contract you uploaded. The non-compete clause seems overly restrictive and may not hold up in court. I suggest renegotiating this clause with your employer to avoid future disputes.
-          </p>
-        </div>
+      
 
         <div>
           <h3 className="font-medium mb-2">Evidence Review</h3>
