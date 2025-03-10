@@ -31,7 +31,12 @@ function Sidebar() {
         </a>
       </nav>
 
-      
+      {/* My Cases */}
+      <div className="mt-12">
+        <h2 className="text-xl font-bold mb-4">MY CASES</h2>
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            
             <span>CASE NAME</span>
           </div>
           <div className="flex items-center gap-2">
