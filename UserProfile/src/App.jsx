@@ -14,7 +14,8 @@ function App() {
       {/* Main Content */}
       <div className="flex-1">
         {/* Top Navigation */}
-        
+        <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
+          <div></div>
           <div className="flex items-center gap-6">
             <Calendar className="w-6 h-6" />
             <HelpCircle className="w-6 h-6" />
