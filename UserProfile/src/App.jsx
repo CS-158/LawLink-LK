@@ -21,7 +21,7 @@ function App() {
             <HelpCircle className="w-6 h-6" />
             <Bell className="w-6 h-6" />
             <div className="flex items-center gap-2">
-              <span>"DESHAN FERNANDO"</span>
+              <span>DESHAN FERNANDO"</span>
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                 <User className="w-6 h-6 text-blue-600" />
               </div>
