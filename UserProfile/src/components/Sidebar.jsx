@@ -26,7 +26,7 @@ function Sidebar() {
           Ask lexbot
         </a>
         <a href="#" className="flex items-center gap-3 text-lg">
-          <Settings className="w-6 h-6" />
+        <Settings className="w-6 h-6" />
           Settings
         </a>
       </nav>
