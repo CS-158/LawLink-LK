@@ -14,11 +14,7 @@ function TaskList() {
           <div className="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center">
             <Check className="w-3 h-3 text-gray-300" />
           </div>
-          <div>
-            <h3 className="font-medium">Upload Supporting Documents</h3>
-            <p className="text-sm text-gray-500">Upload a scanned copy of your lease agreement by 05</p>
-          </div>
-        </div>
+          
 
         <div className="flex items-start gap-3">
           <div className="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center">
