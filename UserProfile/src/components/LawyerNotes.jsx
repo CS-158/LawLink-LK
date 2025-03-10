@@ -17,7 +17,7 @@ function LawyerNotes() {
         </div>
 
         <div>
-          <h3 className="font-medium mb-2"></h3>
+          <h3 className="font-medium mb-2">Evidence Review</h3>
           <p className="text-sm text-gray-600">
             Reviewed the evidence provided on 2024.12.19. The witness statements strongly indicate regarding the faulty product. However, additional supporting documentation from the supplier will strengthen your case. Follow up with them to obtain the original invoice and warranty terms.
           </p>
