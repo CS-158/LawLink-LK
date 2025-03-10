@@ -36,7 +36,7 @@ function Sidebar() {
         <h2 className="text-xl font-bold mb-4">MY CASES</h2>
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+            
             <span>CASE NAME</span>
           </div>
           <div className="flex items-center gap-2">
