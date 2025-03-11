@@ -16,8 +16,13 @@ const App = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
+      {/* Sidebar - Fixed and Full Height */}
+      <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white">
+        <Sidebar />
+      </div>
+
+      {/* Main Content - Offset by Sidebar Width */}
+      <div className="flex-1 flex flex-col ml-64">
         <Header 
           displayName={profileData.displayName} 
           practiceAreas={profileData.practiceAreas} 

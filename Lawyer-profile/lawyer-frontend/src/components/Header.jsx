@@ -92,17 +92,21 @@ const Header = ({ displayName, practiceAreas, profilePicture }) => {
             </div>
           )}
         </div>
+        <a href='http://localhost:5174/'>
         <div className="flex items-center gap-3 pl-4 border-l">
-          <div className="text-right">
-            <div className="font-bold text-white">{displayName}</div>
-            <div className="text-sm text-white">{practiceAreas}</div>
-          </div>
-          <img 
-            src={profilePicture}
-            alt="Profile"
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100"
-          />
+          
+            <div className="text-right">
+              <div className="font-bold text-white">{displayName}</div>
+              <div className="text-sm text-white">{practiceAreas}</div>
+            </div>
+            <img 
+              src={profilePicture}
+              alt="Profile"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100"
+            />
+          
         </div>
+        </a>
       </div>
       {calendarVisible && <CalendarReminders onClose={() => setCalendarVisible(false)} />}
     </header>

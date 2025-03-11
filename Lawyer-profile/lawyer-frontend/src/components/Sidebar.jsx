@@ -3,7 +3,7 @@ import { Grid, FileText, Settings } from 'lucide-react';
 
 const Sidebar = () => {
   return (
-    <div className="w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl mr-0.5">
+    <div className="w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white h-full flex-shrink-0 rounded-tr-3xl rounded-br-3xl">
       <div className="p-6 h-full flex flex-col">
         <div className="flex items-center gap-2 mb-12">
           <div className="text-2xl font-bold tracking-tight">
@@ -16,7 +16,7 @@ const Sidebar = () => {
             <Grid className="w-5 h-5" />
             <span className="font-medium">Dashboard</span>
           </a>
-          <a href="#" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-500/50 px-4 py-2 rounded-lg transition-colors">
+          <a href="http://localhost:5173/" className="flex items-center gap-3 text-white/90 hover:text-white hover:bg-blue-500/50 px-4 py-2 rounded-lg transition-colors">
             <FileText className="w-5 h-5" />
             <span className="font-medium">View Cases</span>
           </a>
