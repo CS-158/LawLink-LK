@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar - Fixed and Full Height */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-600 to-blue-900 text-white">
+      <div className="fixed inset-y-0 left-0 bg-gradient-to-b from-blue-600 to-blue-900 text-white rounded-tr-3xl rounded-br-3xl w-64">
         <Sidebar />
       </div>
 
