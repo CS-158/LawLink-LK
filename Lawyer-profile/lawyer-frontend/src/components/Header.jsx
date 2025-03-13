@@ -92,7 +92,7 @@ const Header = ({ displayName, practiceAreas, profilePicture }) => {
             </div>
           )}
         </div>
-        <a href='http://localhost:5174/'>
+        <a href='#'>
         <div className="flex items-center gap-3 pl-4 border-l">
           
             <div className="text-right">

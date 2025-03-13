@@ -3,6 +3,14 @@ import { Bell, Calendar, HelpCircle, Settings, Grid, Eye } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import CaseCard from './components/CaseCard';
+import ProfileSettings from './components/ProfileSettings'; // Corrected import path
+
+// Mock profile data
+const profileData = {
+  displayName: 'John Doe',
+  practiceAreas: "Criminal Law, Corporate Law",
+  profilePicture: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" // Replace with actual image URL
+};
 
 const cases = [
   {
@@ -23,12 +31,20 @@ const cases = [
 ];
 
 function App() {
-
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
+        <Header 
+          displayName={profileData.displayName} 
+          practiceAreas={profileData.practiceAreas} 
+          profilePicture={profileData.profilePicture} 
+        />
+        <ProfileSettings 
+          profilePicture={profileData.profilePicture}
+          displayName={profileData.displayName}
+          practiceAreas={profileData.practiceAreas}
+        />
         <main className="flex-1 overflow-y-auto p-6">
           <div className="max-w-6xl mx-auto space-y-4">
             {cases.map((caseItem, index) => (
