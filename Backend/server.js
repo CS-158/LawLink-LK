@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { WebSocketServer } from "ws";
+import { Server } from "socket.io";
+import http from "http";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
 import connectTomongoDB from "./db/connectTomongoDB.js";
@@ -14,6 +15,8 @@ import taskRouter from "./routes/tasks.route.js";
 import notificationRouter from "./routes/notification.route.js";
 import noteRouter from "./routes/note.route.js";
 import todoRouter from "./routes/todo.route.js";
+import meetingRouter from "./routes/meeting.route.js";
+import availabiltiyRouter from "./routes/availability.route.js";
 
 dotenv.config();
 
@@ -39,6 +42,8 @@ app.use("/api/tasks", taskRouter);
 app.use("/api/notifications", notificationRouter);
 app.use("/api/notes", noteRouter);
 app.use("/api/todos", todoRouter);
+app.use("/api/meetings", meetingRouter);
+app.use("/api/availability", availabiltiyRouter);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -48,49 +53,78 @@ app.use((err, req, res, next) => {
   });
 });
 
-const server = app.listen(PORT, () => {
+const server = http.createServer(app);
+server.listen(PORT, () => {
   connectTomongoDB();
   console.log(`Server running on port ${PORT}`);
 });
 
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigins,
+    credentials: true,
+  },
+});
+
 global.clients = new Map();
 
-const wss = new WebSocketServer({ server });
+io.on("connection", (socket) => {
+  const userId = socket.handshake.query.userId;
+  console.log(`User connected: ${userId} (Socket ID: ${socket.id})`);
 
-wss.on("connection", (ws, req) => {
-  ws.on("message", async (message) => {
-    try {
-      const data = JSON.parse(message);
+  if (userId) {
+    global.clients.set(userId, socket);
+    socket.userId = userId;
+  } else {
+    console.warn("No userId provided for socket connection");
+  }
 
-      if (data.type === "register") {
-        global.clients.set(data.userId, ws);
-        ws.userId = data.userId;
-        return;
-      }
+  socket.on("newMessage", (message) => {
+    const recipientSocket = global.clients.get(message.receiverId);
+    if (recipientSocket) {
+      console.log(`Forwarding message from ${userId} to ${message.receiverId}`);
+      recipientSocket.emit("newMessage", message);
+    } else {
+      console.log(`Recipient ${message.receiverId} not connected`);
+    }
+  });
 
-      if (data.type === "message") {
-        const recipientWs = global.clients.get(data.receiverId);
-        if (recipientWs && recipientWs.readyState === WebSocket.OPEN) {
-          recipientWs.send(
-            JSON.stringify({
-              type: "message",
-              message: data.message,
-            })
-          );
+  socket.on("join-meeting", (meetingId) => {
+    console.log(`${userId} joined meeting: ${meetingId}`);
+    socket.join(meetingId);
+    socket.to(meetingId).emit("user-joined", userId);
+  });
+
+  socket.on("offer", ({ offer, meetingId }) => {
+    console.log(`Received offer from ${userId} for meeting: ${meetingId}`);
+    socket.to(meetingId).emit("offer", { offer, from: userId });
+  });
+
+  socket.on("answer", ({ answer, meetingId }) => {
+    console.log(`Received answer from ${userId} for meeting: ${meetingId}`);
+    socket.to(meetingId).emit("answer", { answer, from: userId });
+  });
+
+  socket.on("ice-candidate", ({ candidate, meetingId }) => {
+    console.log(`Received ICE candidate from ${userId} for meeting: ${meetingId}`);
+    socket.to(meetingId).emit("ice-candidate", { candidate, from: userId });
+  });
+
+  socket.on("leave-meeting", (meetingId) => {
+    console.log(`${userId} left meeting: ${meetingId}`);
+    socket.to(meetingId).emit("user-left", userId);
+    socket.leave(meetingId);
+  });
+
+  socket.on("disconnect", (reason) => {
+    console.log(`User disconnected: ${userId}. Reason: ${reason}`);
+    if (userId) {
+      global.clients.delete(userId);
+      socket.rooms.forEach((room) => {
+        if (room !== socket.id) {
+          socket.to(room).emit("user-left", userId);
         }
-      }
-    } catch (error) {
-      console.error("WebSocket message error:", error);
+      });
     }
-  });
-
-  ws.on("close", () => {
-    if (ws.userId) {
-      global.clients.delete(ws.userId);
-    }
-  });
-
-  ws.on("error", (error) => {
-    console.error("WebSocket error:", error);
   });
 });
