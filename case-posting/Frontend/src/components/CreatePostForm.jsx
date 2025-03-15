@@ -129,7 +129,7 @@ function CreatePostForm() {
           />
           <label className="text-lg text-gray-600">
             I have read and agreed to the Terms and Conditions. 
-            <a href="#" className="text-blue-500 ml-1">Click here.</a>
+            
           </label>
         </div>
 
