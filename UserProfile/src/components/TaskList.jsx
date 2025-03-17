@@ -36,7 +36,7 @@ function TaskList() {
           </div>
           <div>
             <h3 className="font-medium">Provide Background Information</h3>
-          
+            <p className="text-sm text-gray-500">List the events leading up to the incident with dates and times</p>
           </div>
         </div>
 
