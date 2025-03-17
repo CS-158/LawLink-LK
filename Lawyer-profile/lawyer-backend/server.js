@@ -4,16 +4,20 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/user.route');
 const lawyerRoutes = require('./routes/lawyer.route');
 const path = require('path');
-const cors = require('cors'); // Add this import
+const cors = require('cors');
 
 dotenv.config();
+
+// Debug: Log the MONGO_URI with a newline to avoid interference
+console.log('MONGO_URI:', process.env.MONGO_URI);
+console.log('------------------------'); // Separator
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(cors()); // Use cors middleware
+app.use(cors());
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -31,4 +35,14 @@ if (!fs.existsSync('./uploads/qualifications')) {
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Handle port conflict
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.log(`Port ${PORT} is in use, trying port ${PORT + 1}...`);
+    app.listen(PORT + 1, () => console.log(`Server running on port ${PORT + 1}`));
+  } else {
+    console.error('Server error:', err);
+  }
+});
