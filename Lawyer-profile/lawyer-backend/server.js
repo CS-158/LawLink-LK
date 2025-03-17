@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/user.route');
 const lawyerRoutes = require('./routes/lawyer.route');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors'); // Add this import
 
 dotenv.config();
 
@@ -13,13 +13,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(cors()); // Use cors middleware
 
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/lawyers', lawyerRoutes);
-
-// Add to server.js
-app.use(cors());
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
