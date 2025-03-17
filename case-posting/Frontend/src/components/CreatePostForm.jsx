@@ -128,7 +128,7 @@ function CreatePostForm() {
             className="mr-2"
           />
           <label className="text-lg text-gray-600">
-            I have read and agreed to the Terms and Conditions. 
+            I agreed to the Terms and Conditions. 
             
           </label>
         </div>
