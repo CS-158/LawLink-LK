@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'; // Import useEffect
 import { X } from 'lucide-react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // Default styling for the calendar
+//import 'react-calendar/dist/Calendar.css'; // Default styling for the calendar
 
 const CalendarReminders = ({ onClose }) => {
   const events = [
