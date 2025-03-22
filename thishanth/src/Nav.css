@@ -1,0 +1,136 @@
+.content {
+  width: calc(275px - 20px);
+  height: calc(100vh - 20px);
+  background-color: blue;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 10px;
+}
+
+.content-1 {
+  width: 100%;
+  height: calc(100% - 570px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-1 img {
+  width: 100%;
+}
+
+.content-2 {
+  width: 100%;
+  height: 250px;
+  /* background-color: rgb(68, 0, 255); */
+}
+
+.dashboard,
+.cases,
+.setting {
+  width: 100%;
+  height: calc(100% / 3);
+  /* background-color: yellow; */
+  display: flex;
+}
+
+.dashboard-1,
+.cases-1,
+.setting-1 {
+  width: 60px;
+  height: 100%;
+  /* background-color: deeppink; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-1 i,
+.cases-1 i,
+.setting-1 i {
+  font-size: 25px;
+  color: white;
+}
+
+.dashboard-2,
+.cases-2,
+.setting-2 {
+  width: calc(100% - 60px);
+  height: 100%;
+  /* background-color: rgb(20, 255, 55); */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.dashboard-2 h2,
+.cases-2 h2,
+.setting-2 h2 {
+  font-family: sans-serif;
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.content-3 {
+  width: calc(100% - 20px);
+  height: calc(320px - 20px);
+  padding: 10px;
+  /* background-color: rgb(255, 0, 221); */
+}
+
+.content-3 h2 {
+  color: white;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.content-3-case-1,
+.content-3-case-2,
+.content-3-case-3 {
+  width: 100%;
+  height: calc(100% / 3 - 25px);
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+}
+
+
+
+.content-3-case-1-icon,
+.content-3-case-2-icon,
+.content-3-case-3-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  background-color: rgb(91, 40, 233);
+  border-radius: 100%;
+}
+
+.content-3-case-2-icon {
+  background-color: turquoise;
+}
+
+.content-3-case-3-icon {
+  background-color: rgb(153, 20, 194);
+}
+
+.content-3-case-1-name,
+.content-3-case-2-name,
+.content-3-case-3-name {
+  width: calc(100% - 20px);
+  height: 100%;
+  margin-left: 20px;
+  /* background-color: yellow; */
+  display: flex;
+  align-items: center;
+}
+
+.content-3-case-1-name p,
+.content-3-case-2-name p,
+.content-3-case-3-name p {
+  font-family: sans-serif;
+  font-size: 17px;
+  color: white;
+}
