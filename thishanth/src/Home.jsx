@@ -171,7 +171,11 @@ export default function Home() {
             {/* Popup Box - Appears Above Button */}
             {isOpen && (
               <>
-                
+               <div
+                  className="popup-overlay"
+                  onClick={() => setIsOpen(false)}
+                ></div>
+ 
 
                 <div className="popupbox">
                   {/* Close Button (Arrow Up) */}
