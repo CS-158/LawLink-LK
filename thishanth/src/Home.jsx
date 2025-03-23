@@ -252,11 +252,7 @@ export default function Home() {
                     <div className="desbox">
                       Here's how I can assist you: <br />
                       <br />
-                      Review Documents: <br />I will review your property deed,
-                      survey reports, and any other related documents to assess
-                      the boundary dispute. Negotiation: I will contact your
-                      neighbor to attempt an amicable resolution and clarity the
-                      boundary lines.
+                      
                     </div>
                     <div className="offerbox">
                       <input type="text" placeholder="Write an offer" />
